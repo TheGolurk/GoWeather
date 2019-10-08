@@ -4,9 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/spinner.css">
+    <link rel="shortcut icon" href="images/weather.svg" type="image/x-icon">
 </head>
 <body>
+
+    <div class="lds-dual-ring" id="spinner"></div>
+
+    <h1>Go Weather App</h1>
     
+    <div class="data-box">
+
+        <img src="images/gopher.png" alt="gopher" class="gopher">
+
+        <form>
+            <label for="City">Country</label>
+            <input type="text" name="country" id="country" placeholder="Enter your country">
+            
+            <label for="City">City</label>
+            <input type="text" name="city" id="city" placeholder="Enter your city">
+            
+            <input type="submit" value="Done" id="btnLoad">
+            <!-- <button type="submit" id="btnLoad">Done</button> -->
+        </form>
+
+    </div>
+    
+    <script src="js/script.js"></script>
 </body>
 </html>
