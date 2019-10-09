@@ -9,7 +9,7 @@ const getWeather = () => {
     var getCountry = document.getElementById('country').value
     var getCity = document.getElementById('city').value
     
-    var url = 'http://localhost:5000/getWeather';
+    var url = 'http://192.168.0.4:5000/getWeather';
     var data = {country: getCountry, city: getCity};
     
     fetch(url, {
