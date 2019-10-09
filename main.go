@@ -37,10 +37,6 @@ type Model struct {
 }
 
 func request(c echo.Context) error {
-	//GET request from open weather
-
-	// country := c.FormValue("country")
-	// city := c.FormValue("city")
 
 	var url string
 

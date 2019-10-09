@@ -1,10 +1,10 @@
 const btn = document.getElementById('btnLoad')
-const spn = document.getElementById('spinner')
 
-spn.style.display = 'none'
+var modalBg = document.querySelector('.modal-bg')
+var modalClose = document.querySelector('.modal-close')
+
 
 const getWeather = () => {
-    
     
     var getCountry = document.getElementById('country').value
     var getCity = document.getElementById('city').value
@@ -12,8 +12,6 @@ const getWeather = () => {
     var url = 'http://localhost:5000/getWeather';
     var data = {country: getCountry, city: getCity};
     
-    
-
     fetch(url, {
     method: 'POST', // or 'PUT'
     body: JSON.stringify(data), // data can be `string` or {object}!
@@ -21,32 +19,52 @@ const getWeather = () => {
         'Content-Type': 'application/json'
     }
     }).then(res => res.json())
-    .catch(error => console.error('Error:', error))
+    .catch(error => {
+        console.error('Error:', error)
+        draw(error)
+    })
     .then(response => {
-        const data = response
-        // console.log('Success:', data.weather[0].description)
-        // console.log('Success:', response.weather[0].description)
-        // console.log('Success:', data)
-
-        console.log('Success:', response)
-        console.log('Success:', response.name)  
-        console.log('Success:', response.sys.country)  
-        console.log('Success:', response.weather[0].description)  
-        let tmp = response.main.temp 
-        tmp = tmp - 273.15
-        console.log('succes:',tmp, '°C')
+        modalBg.classList.add('bg-activate')
+        draw(response)
     });
-    spn.style.display = 'none'
 
 }
 
 btn.addEventListener('click', evt =>{
-    spn.style.display = 'block'
     evt.preventDefault()
     getWeather()    
 })
 
+modalClose.addEventListener('click', function(){
+    modalBg.classList.remove('bg-activate')
+})
 
+const draw = data => {
 
-// Crear un card o modal y mostrar si es un error o si hizo bien la peticion
-// mostrar el clima
+    const modal = document.getElementById('myContent')
+    const header = document.getElementById('header')
+    const subHeader = document.getElementById('header-2')
+    const image = document.getElementById('image')
+    const description = document.getElementById('description')
+
+    if(data.cod == '404'){
+
+        header.textContent = '¡UPS!'
+        subHeader.textContent = 'An error has occurred'
+        image.setAttribute('src', '../images/error.png')
+        image.setAttribute('width', '70px')
+        description.textContent = 'Please try again'
+        modal.style.background = 'linear-gradient(rgb(255, 92, 92), rgb(136, 93, 29))'
+        
+    } else {
+        
+        header.textContent = data.main.temp-273.15 + '°C'
+        subHeader.textContent = data.name + ', ' + data.sys.country
+        image.setAttribute('src', 'https://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png')
+        image.setAttribute('width', '120px')
+        description.textContent = data.weather[0].description
+        modal.style.background = 'linear-gradient(rgb(95, 92, 255), rgb(84, 29, 136))'
+        
+    }
+
+}

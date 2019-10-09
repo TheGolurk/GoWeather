@@ -6,12 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weather App</title>
     <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/spinner.css">
+    <link rel="stylesheet" href="styles/modal.css">
     <link rel="shortcut icon" href="images/weather.svg" type="image/x-icon">
 </head>
 <body>
 
-    <div class="lds-dual-ring" id="spinner"></div>
+    <div class="modal-bg">
+        <div class="modal" id="myContent">
+            <h1 id="header"></h1> <br>
+            <h2 id="header-2"></h2>
+            <img id="image" alt="&#9729">
+            <h2 id="description"></h2>
+            <span class="modal-close">X</span>
+        </div>
+    </div>
 
     <h1>Go Weather App</h1>
     
